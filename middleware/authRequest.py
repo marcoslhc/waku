@@ -4,7 +4,7 @@ from utils.templates import render
 
 def error401():
     status = 401
-    body = render('../templates/error/401.html')
+    body = render('templates/error/401.html')
     return Response(status=status, headers={
         'WWW-Authenticate': 'Basic realm="this realm"'
     }, body=body)
