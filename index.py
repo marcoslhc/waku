@@ -1,27 +1,29 @@
 from utils.templates import render
 from core.router import Router
 from core.controller import rest_controller
-from middleware.registerRequest import RegisterRequest
-from middleware.authRequest import AuthRequest
+from controllers.hello import Hello
 
 
-class Hello(object):
-    def __init__(self, req):
-        self.request = req
+middleware = (
+    'middleware.authRequest.AuthRequest',
+    'middleware.registerRequest.RegisterRequest'
+)
 
-    def post(self):
-        vars = {key: value for key, value in self.request.params.iteritems()}
-        return render('templates/hello/index.html', **vars)
 
-    def get(self):
-        return render('templates/hello/form.html')
+def applyMiddleware(app):
+    modules = [('.'.join(module.split('.')[:-1]), '.'.join(module.split('.')[-1:])) for module in middleware]
+    for module, f in modules:
+        module = __import__(module, fromlist=[f])
+        app = getattr(module, f)(app)
+
+    return app
 
 
 hello = rest_controller(Hello)
 hello_world = Router()
 hello_world.add_route('/', controller=hello)
-hello_world = AuthRequest(hello_world)
-hello_world = RegisterRequest(hello_world)
+hello_world = applyMiddleware(hello_world)
+
 
 if __name__ == '__main__':
     import doctest
