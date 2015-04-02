@@ -6,7 +6,9 @@ from controllers.hello import Hello
 
 middleware = (
     'middleware.authRequest.AuthRequest',
-    'middleware.registerRequest.RegisterRequest'
+    'middleware.registerRequest.RegisterRequest',
+    'middleware.cors.CORSRequest',
+
 )
 
 
