@@ -2,7 +2,7 @@ from webob import Request, Response
 
 
 allowed_hosts = ('*')
-methods = ('GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS')
+allowed_methods = ('GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS')
 allowed_headers = [
     ('Access-Control-Allow-Origin', ''),
     ('Access-Control-Max-Age', ''),
@@ -47,16 +47,19 @@ class CORSRequest(object):
     def __call__(self, environ, start_response):
         req = Request(environ)
 
-        if req.method == 'OPTIONS':
+        if not self.validateMethod(req.method):
+            return Response(status=405)
+
+        if req.method in ('OPTIONS', 'HEAD'):
             return Response(status=204)
 
         def custom_start_response(status, headers, exc_info=None):
-            if self.validateMethod(req.method):
-                self.setHeader(headers, 'Access-Control-Allow-Methods',
-                               ','.join(methods))
-                self.setHeader(headers, 'Access-Control-Allow-Credentials',
-                               'True')
-                self.setHeader(headers, 'Access-Control-Allow-Origin',
-                               self.validateOrigin(req.host_url))
+            self.setHeader(headers, 'Access-Control-Allow-Methods',
+                           ','.join(methods))
+            self.setHeader(headers, 'Access-Control-Allow-Credentials',
+                           'True')
+            self.setHeader(headers, 'Access-Control-Allow-Origin',
+                           self.validateOrigin(req.host_url))
             return start_response(status, headers, exc_info)
+
         return self.app(environ, custom_start_response)
