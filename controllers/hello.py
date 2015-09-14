@@ -8,7 +8,6 @@ class Hello(object):
 
     def post(self):
         vars = variable_decode(self.request.params)
-        print(vars)
         return render('templates/hello/index.html', **vars)
 
     def get(self):
