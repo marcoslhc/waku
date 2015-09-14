@@ -13,11 +13,11 @@ middleware = (
 
 
 def applyMiddleware(app):
-    modules = [('.'.join(module.split('.')[:-1]), '.'.join(module.split('.')[-1:])) for module in middleware]
+    modules = [('.'.join(module.split('.')[:-1]),
+                '.'.join(module.split('.')[-1:])) for module in middleware]
     for module, f in modules:
         module = __import__(module, fromlist=[f])
         app = getattr(module, f)(app)
-
     return app
 
 
@@ -25,7 +25,6 @@ hello = rest_controller(Hello)
 hello_world = Router()
 hello_world.add_route('/', controller=hello)
 hello_world = applyMiddleware(hello_world)
-
 
 if __name__ == '__main__':
     import doctest
