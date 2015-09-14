@@ -37,7 +37,7 @@ class CORSRequest(object):
         return (header, value)
 
     def validateMethod(self, method):
-        return (method in methods and method) or False
+        return (method in allowed_methods and method) or False
 
     def validateOrigin(self, origin):
         return ('*' in allowed_hosts or origin in allowed_hosts) \
@@ -55,7 +55,7 @@ class CORSRequest(object):
 
         def custom_start_response(status, headers, exc_info=None):
             self.setHeader(headers, 'Access-Control-Allow-Methods',
-                           ','.join(methods))
+                           ','.join(allowed_methods))
             self.setHeader(headers, 'Access-Control-Allow-Credentials',
                            'True')
             self.setHeader(headers, 'Access-Control-Allow-Origin',
