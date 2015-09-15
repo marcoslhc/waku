@@ -11,6 +11,7 @@ def error401():
 
 
 class AuthRequest(object):
+
     def __init__(self, app):
         self.app = app
 

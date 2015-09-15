@@ -3,6 +3,7 @@ from threading import local
 
 
 class Localized(object):
+
     def __init__(self):
         self.local = local()
 

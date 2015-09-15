@@ -14,6 +14,7 @@ allowed_headers = [
 
 
 class InvalidHeaderException(Exception):
+
     def __init__(self, value):
         self.value = value
 
@@ -22,6 +23,7 @@ class InvalidHeaderException(Exception):
 
 
 class CORSRequest(object):
+
     def __init__(self, app):
         self.app = app
 

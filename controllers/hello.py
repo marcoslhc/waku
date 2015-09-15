@@ -2,6 +2,7 @@ from utils.templates import render
 from formencode.variabledecode import variable_decode
 from core.controller import rest_controller
 
+
 @rest_controller
 class Hello(object):
     kwargs = {}
