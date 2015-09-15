@@ -1,5 +1,5 @@
 from webob import Request, Response
-from utils.templates import render
+from core.templates import render
 
 
 def error401():

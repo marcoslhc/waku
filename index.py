@@ -1,6 +1,4 @@
-from utils.templates import render
 from core.router import Router
-from core.controller import rest_controller
 from controllers.hello import Hello
 
 

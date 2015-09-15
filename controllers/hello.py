@@ -1,5 +1,5 @@
-from utils.templates import render
 from formencode.variabledecode import variable_decode
+from core.templates import Template
 from core.controller import rest_controller
 
 
@@ -16,7 +16,7 @@ class Hello(object):
         self.kwargs.update(post_vars)
 
     def post(self):
-        return render('templates/hello/index.html', **self.kwargs)
+        return Template('templates/hello/index.html', self.kwargs).render()
 
     def get(self):
-        return render('templates/hello/form.html', **self.kwargs)
+        return Template('templates/hello/form.html', self.kwargs).render()
