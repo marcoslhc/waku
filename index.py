@@ -21,9 +21,8 @@ def applyMiddleware(app):
     return app
 
 
-hello = rest_controller(Hello)
 hello_world = Router()
-hello_world.add_route('/{name:\w*}', controller=hello)
+hello_world.add_route('/hello/{name:\w*}', controller=Hello)
 hello_world = applyMiddleware(hello_world)
 
 if __name__ == '__main__':
