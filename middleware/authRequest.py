@@ -1,10 +1,10 @@
 from webob import Request, Response
-from core.templates import render
+from core.template import Template
 
 
 def error401():
     status = 401
-    body = render('templates/error/401.html')
+    body = Template('templates/error/401.html').render()
     return Response(status=status, headers={
         'WWW-Authenticate': 'Basic realm="this realm"'
     }, body=body)

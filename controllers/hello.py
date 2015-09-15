@@ -1,5 +1,5 @@
 from formencode.variabledecode import variable_decode
-from core.templates import Template
+from core.template import Template
 from core.controller import rest_controller
 
 
