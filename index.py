@@ -20,7 +20,9 @@ def applyMiddleware(app):
 
 
 hello_world = Router()
+
 hello_world.add_route('/hello/{name:\w*}', controller=Hello)
+
 hello_world = applyMiddleware(hello_world)
 
 if __name__ == '__main__':
@@ -28,6 +30,6 @@ if __name__ == '__main__':
     from wsgiref.simple_server import make_server
 
     doctest.testmod()
-    print 'serving'
+    print('serving')
     server = make_server('127.0.0.1', 8080, hello_world)
     server.serve_forever()

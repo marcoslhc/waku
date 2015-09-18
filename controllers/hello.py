@@ -16,7 +16,7 @@ class Hello(object):
         self.kwargs.update(post_vars)
 
     def post(self):
-        return Template('templates/hello/index.html', self.kwargs).render()
+        return Template('hello/index.html', self.kwargs).render()
 
     def get(self):
-        return Template('templates/hello/form.html', self.kwargs).render()
+        return Template('hello/form.html', self.kwargs).render()
