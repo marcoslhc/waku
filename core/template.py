@@ -5,14 +5,14 @@ import core.exception
 import settings
 
 
-class NotSuchTemplateFileException(core.exception.BaseException):
+class NotSuchTemplateFileException(core.exception.WakuBaseException):
     pass
 
 
 class Template(object):
 
     def __init__(self, template=None, context=None):
-        self.context = context
+        self.context = context or {}
         if isinstance(template, basestring):
             template_file = self.get_template_file(template)
             self.template = _Template(template_file)

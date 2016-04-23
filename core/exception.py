@@ -1,4 +1,4 @@
-class BaseException(Exception):
+class WakuBaseException(Exception):
 
     def __init__(self, message=None, code=None, original_exception=None):
         self.message = message or 'Template does not exists'
